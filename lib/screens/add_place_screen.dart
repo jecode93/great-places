@@ -41,7 +41,7 @@ final _titleController = TextEditingController();
                 ),
               ),
             )
-          )
+          ),
           ElevatedButton.icon(
             icon: Icon(Icons.add),
             label: Text('Add Place'),
