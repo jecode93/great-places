@@ -12,7 +12,7 @@ class ImageInput extends StatefulWidget {
 }
 
 class _ImageInputState extends State<ImageInput> {
-  File _storeImage;
+  late File _storeImage;
 
   _takePicture() async {
     final imageFile = await ImagePicker.platform.pickImage(
@@ -23,8 +23,7 @@ class _ImageInputState extends State<ImageInput> {
       _storeImage = imageFile as File;
     });
     final appDir = await syspath.getApplicationDocumentsDirectory();
-    final fileName = path.basename(imageFile.path);
-    final saveImage = await imageFile.copy('${appDir.path}/$fileName');
+    final fileName = path.basename(imageFile!.path);
   }
 
   @override
@@ -43,19 +42,21 @@ class _ImageInputState extends State<ImageInput> {
                   fit: BoxFit.cover,
                   width: double.infinity,
                 )
-              : Text(
+              : const Text(
                   'No image taken',
                   textAlign: TextAlign.center,
                 ),
           alignment: Alignment.center,
         ),
-        SizedBox(
+        const SizedBox(
           width: 10,
         ),
         TextButton.icon(
-          icon: Icon(Icons.camera),
-          label: Text('Take Picture'),
-          textColor: Theme.of(context).primaryColor,
+          icon: const Icon(Icons.camera),
+          label: const Text('Take Picture'),
+          style: TextButton.styleFrom(
+            primary: Theme.of(context).primaryColor,
+          ),
           onPressed: _takePicture,
         ),
       ],
